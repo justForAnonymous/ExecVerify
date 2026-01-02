@@ -1,0 +1,21 @@
+You are given a Python function and a question about its execution behavior.
+Your task is to answer the question with YES or NO.
+
+First, simulate the execution of the provided code using the given input, even if the function is incorrect or incomplete.
+Then, determine whether the specified line is executed.
+
+
+[PYTHON]
+{code}
+{invocation}
+[/PYTHON]
+
+[QUESTION]
+Is Line {line} ({codeline}) executed when {invocation_abbr} is called?
+[/QUESTION]
+
+Output Format:
+Your output must strictly follow the format below:
+
+<reasoning>your step-by-step reasoning process</reasoning>
+<answer>YES or NO</answer>

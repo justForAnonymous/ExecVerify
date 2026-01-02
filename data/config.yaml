@@ -1,0 +1,103 @@
+# ExecVerify Data Pipeline Configuration
+# Please update the model paths before running the pipeline
+
+# Model paths - REQUIRED: Update these paths to your model locations
+models:
+  code_generator: null  # Path to code generation model (e.g., Qwen2.5-Coder-30B)
+  reasoning_model: null  # Path to reasoning model (e.g., QwQ-32B)
+  difficulty_evaluator: null  # Path to difficulty evaluation model (e.g., Qwen2.5-Coder-7B)
+
+# Generation parameters for different stages
+generation:
+  code_synthesis:
+    temperature: 0.8
+    top_p: 0.9
+    max_tokens: 4096
+    repetition_penalty: 1.0
+    tensor_parallel_size: 8
+    gpu_memory_utilization: 0.9
+    max_model_len: 8192
+  
+  input_synthesis:
+    temperature: 0.4
+    top_p: 0.9
+    max_tokens: 4096
+    repetition_penalty: 1.05
+    tensor_parallel_size: 8
+    gpu_memory_utilization: 0.9
+    max_model_len: 8192
+  
+  cot_extraction:
+    temperature: 0.6
+    top_p: 0.9
+    max_tokens: 4096
+    repetition_penalty: 1.0
+    tensor_parallel_size: 8
+    gpu_memory_utilization: 0.8
+    max_model_len: 10240
+  
+  difficulty_evaluation:
+    temperature: 1.0
+    top_p: 0.9
+    max_tokens: 4096
+    n_samples: 10
+    tensor_parallel_size: 4
+    gpu_memory_utilization: 0.8
+    max_model_len: 4608
+
+# Dataset size limits for each stage
+dataset_limits:
+  raw_dataset_per_config: 40000  # Number of samples per configuration setting
+  io_cot_subset: 40000  # Subset size for IO chain-of-thought extraction
+  oi_cot_subset: 40000  # Subset size for OI chain-of-thought extraction
+  sft_dataset_size: 15000  # Number of samples for SFT dataset
+  rl_dataset_size: 20000  # Number of samples for RL dataset
+  oi_rl_dataset_size: 12000  # Number of OI samples for RL dataset
+  oi_result_max_length: 150  # Maximum length for OI result strings
+
+# Filtering parameters
+filtering:
+  max_pass_count: 3  # Maximum pass count for difficulty filtering
+  max_workers: 64  # Number of parallel workers for execution filtering
+  execution_timeout: 0.5  # Timeout in seconds for code execution
+  trace_timeout: 0.01  # Timeout in seconds for trace execution
+
+# Code generation constraints
+code_generation:
+  control_flow_max_depth: 3  # Maximum depth for control flow structures
+  reference_values:
+    int_range_min: 5
+    int_range_max: 20
+    string_length: 20
+    collection_length_min: 5
+    collection_length_max: 15
+
+# Input/Output paths (relative to the data directory)
+paths:
+  methods_dir: "methods"  # Directory containing method definition files
+  output_dir: "."  # Output directory for generated datasets
+
+# File names for intermediate and final outputs
+output_files:
+  raw_dataset: "raw_dataset.json"
+  mutated_raw_dataset: "mutated_raw_dataset.json"
+  processed_raw_dataset: "processed_raw_dataset.json"
+  processed_mutated_dataset: "processed_mutated_dataset.json"
+  processed_raw_with_difficulties: "processed_raw_dataset_with_difficulties.json"
+  processed_mutated_with_difficulties: "processed_mutated_dataset_with_difficulties.json"
+  filtered_all_with_difficulties: "filtered_all_dataset_with_difficulties.json"
+  io_cot_dataset: "filtered_all_dataset_with_difficulties_subset_with_io_cot.json"
+  oi_cot_dataset: "filtered_all_dataset_with_difficulties_subset_with_oi_cot.json"
+  io_sft_dataset: "io_sft_dataset.json"
+  oi_sft_dataset: "oi_sft_dataset.json"
+  sft_dataset: "sft_dataset.json"
+  candidates_io_multi_task: "candidates_io_for_multi_task_with_cot.json"
+  candidates_oi_multi_task: "candidates_oi_for_multi_task_with_cot.json"
+  io_traces: "io_dataset_for_mutiple_tasks_with_traces.json"
+  rl_dataset: "rl_dataset.json"
+
+# Logging configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+

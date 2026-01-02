@@ -1,0 +1,47 @@
+You are given a Python function and test code that includes input(s) to the function.
+Your task is to complete the assertions in the test code with the expected output values.
+Try to execute the code, even if the function is incorrect or incomplete.
+
+Follow the style shown in the examples below.
+
+
+Example one:
+[PYTHON]
+def g(s):
+    return s + "a"
+
+assert g("x9j") == ??
+[/PYTHON]
+[ANSWER]
+assert g("x9j") == "x9ja"
+[/ANSWER]
+
+Example two:
+[PYTHON]
+class A:
+    def __init__(self, x):
+        self.x = x
+
+    def f(self, y):
+        return self.x + y
+
+# Test code starts here. Only write the completed test code in your answer.
+a = A(3)
+assertEqual(a.f(2), ??)
+assertEqual(a.f(4), ??)
+[/PYTHON]
+[ANSWER]
+a = A(3)
+assertEqual(a.f(2), 5)
+assertEqual(a.f(4), 7)
+[/ANSWER]
+
+Now complete the following assertions:
+[PYTHON]
+{code}
+{invocation}
+[/PYTHON]
+
+Format your response strictly as follows:
+<reasoning>your step-by-step reasoning here</reasoning>
+<answer>the complete assertion statements</answer>

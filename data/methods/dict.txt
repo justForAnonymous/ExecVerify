@@ -1,0 +1,19 @@
+in
+not in 
+==
+dict[key]
+len
+!=
+|
+dict[key] = value
+clear
+copy
+fromkeys
+get
+items
+keys
+pop
+popitem
+setdefault
+update
+values

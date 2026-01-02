@@ -1,0 +1,59 @@
+You are a Python execution tracer. You will be given a function, an invocation, and a target line of code. Your goal is to determine the next line to be executed.
+
+Analyze the provided Python code and its invocation to answer the question.
+
+Example:
+[PYTHON]
+def f(a, b):
+  ans = a + b
+  if ans > 0:
+      ans = int(a)
+  else:
+      ans = b
+  return ans
+
+f(1.1, 2)
+[/PYTHON]
+[QUESTION]
+Tracing the call f(1.1, 2), what line is executed immediately after ans = int(a)?
+[/QUESTION]
+
+Correct Response:
+<reasoning>
+1. The function `f` is called with `a=1.1` and `b=2`.
+2. `ans` is calculated as `1.1 + 2`, which is `3.1`.
+3. The condition `ans > 0` (i.e., `3.1 > 0`) is true.
+4. Execution enters the `if` block.
+5. The target line `ans = int(a)` is executed.
+6. After the `if` block completes, execution proceeds to the next statement outside the `if/else` structure.
+7. The next line is `return ans`.
+</reasoning>
+<answer>
+return ans
+</answer>
+
+Your Task:
+[PYTHON]
+{code}
+{invocation}
+[/PYTHON]
+[QUESTION]
+During the execution of {invocation_abbr}, what line of code is executed immediately after {codeline}?
+[/QUESTION]
+
+Rules:
+
+1. If {codeline} is never reached during the execution, the answer is -1.
+
+2. If the function terminates immediately after {codeline} (e.g., it is a return statement or the final line), the answer is -1.
+
+3. Otherwise, the answer is the verbatim source code of the next line. Do not use line numbers.
+
+
+Format your response strictly as follows, with no other text:
+<reasoning>
+Your step-by-step reasoning for the execution flow.
+</reasoning>
+<answer>
+The raw code statement or -1.
+</answer>

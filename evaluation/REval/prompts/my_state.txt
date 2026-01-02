@@ -1,0 +1,82 @@
+You are given a Python function and a question about its execution behavior.
+Your task is to simulate the code execution and answer in the format: value; type
+If the specified line is not executed, answer with: Nil
+
+There may be multiple possible answers, but you should output only one.
+
+Following the examples:
+Example one:
+[PYTHON]
+def f(a, b):
+    ans = a + b
+    if ans > 0:
+        ans = int(a)
+    else:
+        ans = b
+    return ans
+
+f(1.1, 2)
+[/PYTHON]
+[QUESTION]
+Is Line 4 (        ans = int(a)) executed when f(1.1, 2) is called? If so, what is the value and type of the variable ans after Line 4 is executed? 
+If the code statement is not executed, answer Nil.
+[/QUESTION]
+[ANSWER]
+1; int
+[/ANSWER]
+
+Example two:
+[PYTHON]
+def f(a, b):
+    ans = a + b
+    if ans > 0:
+        ans = int(a)
+    else:
+        ans = b
+    return ans
+
+f(1.1, -2)
+[/PYTHON]
+[QUESTION]
+Is Line 4 (        ans = int(a)) executed when f(1.1, -2) is called? If so, what is the value and type of the variable ans after Line 4 is executed?
+If the code statement is not executed, answer Nil.
+[/QUESTION]
+[ANSWER]
+Nil
+[/ANSWER]
+
+Example three:
+[PYTHON]
+class A:
+    def __init__(self):
+        self.x = []
+    
+    def f(self, y):
+        self.x.append(y)
+        return y
+
+a = A()
+assertEqual(a.f('a'), 'a')
+[/PYTHON]
+[QUESTION]
+Is Line 6 (        self.x.append(y)) executed when the above test code is called? If so, what is the value and type of the variable self.x after Line 6 is executed?
+If the code statement is not executed, answer Nil.
+[/QUESTION]
+[ANSWER]
+['a']; list
+[/ANSWER]
+
+Now simulate the code execution and answer the question below.
+[PYTHON]
+{code}
+{invocation}
+[/PYTHON]
+
+[QUESTION]
+Is Line {line} ({codeline}) executed when {invocation_abbr} is called? If so, what is the value and type of the variable {var} after Line {line} is executed?
+If the code statement is not executed, answer Nil.
+[/QUESTION]
+
+Format your response strictly as follows:
+<reasoning>your step-by-step reasoning here</reasoning>
+<answer>your answer </answer>

@@ -1,0 +1,17 @@
++
+bool()
+math.ceil()
+divmod
+math.floor()
+>=
+>
+<
+<=
+-
+int()
+% 
+!=
+round
+as_integer_ratio
+conjugate
+is_integer

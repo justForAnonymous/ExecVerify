@@ -1,0 +1,18 @@
++
+[index]
+[:]
+[index1:index2]
+[index:]
+[:index2]
+in
+not in
+==
+>=
+>
+<=
+<
+len
+*
+!=
+count
+index
